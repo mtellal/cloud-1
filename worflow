@@ -1,0 +1,11 @@
+-> launch vm 
+-> verify the network interfaces (private and public addresses)
+-> if dhcp not set, edit network interfaces
+auto xxx
+iface xxx inet dhcp 
+-> install ssh
+-> /etc/ssh/sshd_config - set PermiRootLogin: yes 
+-> ssh-copy-id of root 
+-> set PermitRootLogin: prohibit-password (good practice) 
+-> Launch playbook 
+-> The wordpress site is at https://vm_ip
