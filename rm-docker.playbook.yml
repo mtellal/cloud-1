@@ -1,0 +1,31 @@
+---
+- name: test
+  hosts: vm
+  tasks:
+  
+    - name: Remove docker packages and configuration files (purge)
+      ansible.builtin.apt:
+        - name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        purge: true
+        autoremove: true
+        state: absent
+    
+    - name: Remove docker associated files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+      - /var/lib/docker
+      - /etc/docker
+      - /var/run/docker.sock
+      - /var/lib/containerd
+
+    - name: Remove docker group 
+      ansible.builtin.group:
+        name: docker
+        status: absent

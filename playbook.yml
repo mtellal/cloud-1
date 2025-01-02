@@ -1,16 +1,30 @@
 ---
-- name: test
+- name: cloud-1
   hosts: vm
   tasks:
   # wget get.docker.com -> 
   # mv index.html script.sh -> 
   # execute script in sudo 
   # add user to docker group
-    - name: Download docker installation script 
-      ansible.builtin.get_url:
-        url: "https://get.docker.com"
-        dest: ~/get_docker.sh
-        mode: 777
+
+
+    - name: Remove docker packages and configuration files (purge)
+      ansible.builtin.apt:
+        - name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        purge: true
+        autoremove: true
+        state: present
+
+#    - name: Download docker installation script 
+#      ansible.builtin.get_url:
+#        url: "https://get.docker.com"
+#        dest: ~/get_docker.sh
+#        mode: 777
 
     - name: Execute docker script installation
       ansible.builtin.shell:
@@ -24,3 +38,9 @@
     - name: Make inside the inception folder 
       ansible.builtin.shell:
         cmd: "make -C ~/inception"
+
+    - name: Up wordpress's site after reboot
+      ansible.builtin.cron:
+        name: "up wordpress site"
+        special_time: "reboot"
+        job: "make -C ~/inception"
