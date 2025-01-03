@@ -2,8 +2,6 @@
 - name: cloud-1
   hosts: vm
   tasks:
-  # install docker packages
-  # set cron to up the site each reboot
 
   - name: Download docker's official gpg key (debian)
     ansible.builtin.get_url:
@@ -26,28 +24,18 @@
       state: present
       update_cache: yes
 
+  - name: Copy the inception folder to the home node 
+    ansible.builtin.copy:
+      src: ./inception
+      dest: ~/
+
   - name: Up wordpress's site after reboot via cron
     ansible.builtin.cron:
       name: "up wordpress site"
       special_time: "reboot"
-      job: "echo 'command_executed after reboot' > /home/mtellal/file_reboot"
+      job: "make -C ~/inception"
 
+  - name: Launch inception services 
+    ansible.builtin.shell:
+      cmd: "make -C ~/inception"
 
-#    - name: Download docker installation script 
-#      ansible.builtin.get_url:
-#        url: "https://get.docker.com"
-#        dest: ~/get_docker.sh
-#        mode: 777
-
-#    - name: Execute docker script installation
-#      ansible.builtin.shell:
-#        cmd: "~/get_docker.sh"
-
-#    - name: Copy the inception folder to the home node 
-#      ansible.builtin.copy:
-#        src: ./inception
-#        dest: ~/
-#
-#    - name: Make inside the inception folder 
-#      ansible.builtin.shell:
-#        cmd: "make -C ~/inception"

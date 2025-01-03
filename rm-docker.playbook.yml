@@ -31,5 +31,3 @@
     ansible.builtin.group:
       name: docker
       state: absent
-
-## miss gpg key and apt source
