@@ -3,7 +3,7 @@
   hosts: vm
   tasks:
 
-  - name: Download docker's official gpg key (debian)
+  - name: Download docker's official gpg key (ubuntu)
     ansible.builtin.get_url:
       url: https://download.docker.com/linux/ubuntu/gpg
       dest: /etc/apt/keyrings/docker.asc
@@ -33,7 +33,7 @@
 
   - name: Copy the inception folder to the home node 
     ansible.builtin.copy:
-      src: ./inception
+      src: ../inception
       dest: ~/
 
   - name: Add the IP in DOMAIN_NAME in .env file
@@ -41,6 +41,12 @@
       path: ~/inception/srcs/.env
       regexp: '^DOMAIN_NAME=.*'
       line: "DOMAIN_NAME={{ ansible_host }}"
+
+  - name: Add the IP in PMA_ABSOLUTE_URI in .env file
+    ansible.builtin.lineinfile:
+      path: ~/inception/srcs/.env
+      regexp: '^PMA_ABSOLUTE_URI=.*'
+      line: "PMA_ABSOLUTE_URI=https://{{ ansible_host }}/phpmyadmin"
 
   - name: Up wordpress's site after reboot via cron
     ansible.builtin.cron:
