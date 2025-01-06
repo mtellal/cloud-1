@@ -1,0 +1,130 @@
+2025-01-06 15:09:10,058 p=3264198 u=mtellal n=ansible | PLAY [cloud-1] *************************************************************************************************************************************************************************************************
+2025-01-06 15:09:10,066 p=3264198 u=mtellal n=ansible | TASK [Gathering Facts] *****************************************************************************************************************************************************************************************
+2025-01-06 15:09:11,773 p=3264198 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:09:15,332 p=3264198 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:09:15,335 p=3264198 u=mtellal n=ansible | TASK [Download docker's official gpg key (debian)] *************************************************************************************************************************************************************
+2025-01-06 15:09:15,772 p=3264198 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:09:17,840 p=3264198 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:09:17,844 p=3264198 u=mtellal n=ansible | TASK [Add docker repository to apt sources] ********************************************************************************************************************************************************************
+2025-01-06 15:09:18,156 p=3264198 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:09:20,129 p=3264198 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:09:20,132 p=3264198 u=mtellal n=ansible | TASK [Install docker packages] *********************************************************************************************************************************************************************************
+2025-01-06 15:09:55,452 p=3264198 u=mtellal n=ansible | fatal: [51.159.180.166]: FAILED! => {"changed": false, "msg": "Failed to update apt cache: W:Updating from such a repository can't be done securely, and is therefore disabled by default., W:See apt-secure(8) manpage for repository creation and user configuration details., E:The repository 'https://download.docker.com/linux/debian jammy Release' does not have a Release file."}
+2025-01-06 15:10:06,076 p=3264198 u=mtellal n=ansible | fatal: [165.227.215.103]: FAILED! => {"changed": false, "msg": "Failed to update apt cache: W:Updating from such a repository can't be done securely, and is therefore disabled by default., W:See apt-secure(8) manpage for repository creation and user configuration details., W:Repositories should provide a clear-signed InRelease file, but none found at https://download.docker.com/linux/debian/dists/oracular/InRelease., E:The repository 'https://download.docker.com/linux/debian oracular Release' does not have a Release file."}
+2025-01-06 15:10:06,077 p=3264198 u=mtellal n=ansible | PLAY RECAP *****************************************************************************************************************************************************************************************************
+2025-01-06 15:10:06,077 p=3264198 u=mtellal n=ansible | 165.227.215.103            : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-06 15:10:06,077 p=3264198 u=mtellal n=ansible | 51.159.180.166             : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-06 15:10:33,924 p=3264519 u=mtellal n=ansible | PLAY [cloud-1] *************************************************************************************************************************************************************************************************
+2025-01-06 15:10:33,927 p=3264519 u=mtellal n=ansible | TASK [Gathering Facts] *****************************************************************************************************************************************************************************************
+2025-01-06 15:10:35,004 p=3264519 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:10:37,118 p=3264519 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:10:37,121 p=3264519 u=mtellal n=ansible | TASK [Download docker's official gpg key (debian)] *************************************************************************************************************************************************************
+2025-01-06 15:10:37,550 p=3264519 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:10:39,576 p=3264519 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:10:39,579 p=3264519 u=mtellal n=ansible | TASK [Add docker repository to apt sources] ********************************************************************************************************************************************************************
+2025-01-06 15:10:39,904 p=3264519 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:10:41,788 p=3264519 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:10:41,791 p=3264519 u=mtellal n=ansible | TASK [Install docker packages] *********************************************************************************************************************************************************************************
+2025-01-06 15:11:13,938 p=3264519 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:11:15,422 p=3264519 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:11:15,425 p=3264519 u=mtellal n=ansible | TASK [Copy the inception folder to the home node] **************************************************************************************************************************************************************
+2025-01-06 15:11:30,589 p=3264519 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:12:25,854 p=3264519 u=mtellal n=ansible |  [ERROR]: User interrupted execution
+
+2025-01-06 15:13:25,704 p=3265555 u=mtellal n=ansible | PLAY [cloud-1] *************************************************************************************************************************************************************************************************
+2025-01-06 15:13:25,707 p=3265555 u=mtellal n=ansible | TASK [Gathering Facts] *****************************************************************************************************************************************************************************************
+2025-01-06 15:13:26,991 p=3265555 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:13:31,029 p=3265555 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:13:31,031 p=3265555 u=mtellal n=ansible | TASK [Download docker's official gpg key (debian)] *************************************************************************************************************************************************************
+2025-01-06 15:13:31,479 p=3265555 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:13:33,640 p=3265555 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:13:33,643 p=3265555 u=mtellal n=ansible | TASK [Add docker repository to apt sources] ********************************************************************************************************************************************************************
+2025-01-06 15:13:33,973 p=3265555 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:13:35,862 p=3265555 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:13:35,865 p=3265555 u=mtellal n=ansible | TASK [Install docker packages] *********************************************************************************************************************************************************************************
+2025-01-06 15:13:41,062 p=3265555 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:13:42,678 p=3265555 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:13:42,681 p=3265555 u=mtellal n=ansible | TASK [Copy the inception folder to the home node] **************************************************************************************************************************************************************
+2025-01-06 15:13:56,327 p=3265555 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:15:40,939 p=3265555 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:15:40,941 p=3265555 u=mtellal n=ansible | TASK [Add the IP in DOMAIN_NAME in .env file] ******************************************************************************************************************************************************************
+2025-01-06 15:15:41,754 p=3265555 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:15:43,270 p=3265555 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:15:43,272 p=3265555 u=mtellal n=ansible | TASK [Up wordpress's site after reboot via cron] ***************************************************************************************************************************************************************
+2025-01-06 15:15:43,651 p=3265555 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:15:45,602 p=3265555 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:15:45,605 p=3265555 u=mtellal n=ansible | TASK [Launch inception services] *******************************************************************************************************************************************************************************
+2025-01-06 15:15:45,853 p=3265555 u=mtellal n=ansible | fatal: [51.159.180.166]: FAILED! => {"changed": true, "cmd": "make -C ~/inception", "delta": "0:00:00.002349", "end": "2025-01-06 14:15:45.829328", "msg": "non-zero return code", "rc": 127, "start": "2025-01-06 14:15:45.826979", "stderr": "/bin/sh: 1: make: not found", "stderr_lines": ["/bin/sh: 1: make: not found"], "stdout": "", "stdout_lines": []}
+2025-01-06 15:15:47,897 p=3265555 u=mtellal n=ansible | fatal: [165.227.215.103]: FAILED! => {"changed": true, "cmd": "make -C ~/inception", "delta": "0:00:00.006320", "end": "2025-01-06 14:15:47.585724", "msg": "non-zero return code", "rc": 127, "start": "2025-01-06 14:15:47.579404", "stderr": "/bin/sh: 1: make: not found", "stderr_lines": ["/bin/sh: 1: make: not found"], "stdout": "", "stdout_lines": []}
+2025-01-06 15:15:47,897 p=3265555 u=mtellal n=ansible | PLAY RECAP *****************************************************************************************************************************************************************************************************
+2025-01-06 15:15:47,897 p=3265555 u=mtellal n=ansible | 165.227.215.103            : ok=7    changed=4    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-06 15:15:47,897 p=3265555 u=mtellal n=ansible | 51.159.180.166             : ok=7    changed=3    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2025-01-06 15:16:45,935 p=3266741 u=mtellal n=ansible | ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  did not find expected key. while parsing a block mapping
+  in "<unicode string>", line 16, column 5
+did not find expected key
+  in "<unicode string>", line 27, column 5
+
+The error appears to be in '/home/mtellal/Documents/cloud-1/src/cloud-1.yml': line 27, column 5, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+    - name: Install make package
+    ^ here
+
+2025-01-06 15:16:57,742 p=3266841 u=mtellal n=ansible | PLAY [cloud-1] *************************************************************************************************************************************************************************************************
+2025-01-06 15:16:57,745 p=3266841 u=mtellal n=ansible | TASK [Gathering Facts] *****************************************************************************************************************************************************************************************
+2025-01-06 15:16:59,392 p=3266841 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:17:03,802 p=3266841 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:17:03,805 p=3266841 u=mtellal n=ansible | TASK [Download docker's official gpg key (debian)] *************************************************************************************************************************************************************
+2025-01-06 15:17:04,274 p=3266841 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:17:06,517 p=3266841 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:17:06,520 p=3266841 u=mtellal n=ansible | TASK [Add docker repository to apt sources] ********************************************************************************************************************************************************************
+2025-01-06 15:17:06,835 p=3266841 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:17:08,951 p=3266841 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:17:08,953 p=3266841 u=mtellal n=ansible | TASK [Install docker packages] *********************************************************************************************************************************************************************************
+2025-01-06 15:17:13,302 p=3266841 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:17:16,298 p=3266841 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:17:16,300 p=3266841 u=mtellal n=ansible | TASK [Install make package] ************************************************************************************************************************************************************************************
+2025-01-06 15:17:24,000 p=3266841 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:17:27,138 p=3266841 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:17:27,141 p=3266841 u=mtellal n=ansible | TASK [Copy the inception folder to the home node] **************************************************************************************************************************************************************
+2025-01-06 15:17:40,898 p=3266841 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:19:15,914 p=3266841 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:19:15,917 p=3266841 u=mtellal n=ansible | TASK [Add the IP in DOMAIN_NAME in .env file] ******************************************************************************************************************************************************************
+2025-01-06 15:19:16,745 p=3266841 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:19:18,156 p=3266841 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:19:18,159 p=3266841 u=mtellal n=ansible | TASK [Up wordpress's site after reboot via cron] ***************************************************************************************************************************************************************
+2025-01-06 15:19:18,485 p=3266841 u=mtellal n=ansible | ok: [51.159.180.166]
+2025-01-06 15:19:20,427 p=3266841 u=mtellal n=ansible | ok: [165.227.215.103]
+2025-01-06 15:19:20,431 p=3266841 u=mtellal n=ansible | TASK [Launch inception services] *******************************************************************************************************************************************************************************
+2025-01-06 15:21:49,403 p=3266841 u=mtellal n=ansible | changed: [165.227.215.103]
+2025-01-06 15:22:55,391 p=3266841 u=mtellal n=ansible | changed: [51.159.180.166]
+2025-01-06 15:22:55,392 p=3266841 u=mtellal n=ansible | PLAY RECAP *****************************************************************************************************************************************************************************************************
+2025-01-06 15:22:55,392 p=3266841 u=mtellal n=ansible | 165.227.215.103            : ok=9    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-06 15:22:55,392 p=3266841 u=mtellal n=ansible | 51.159.180.166             : ok=9    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-01-06 15:25:57,716 p=3268872 u=mtellal n=ansible | 51.159.180.166 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Shared connection to 51.159.180.166 closed.",
+    "unreachable": true
+}
+2025-01-06 15:26:01,886 p=3268872 u=mtellal n=ansible | 165.227.215.103 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: mux_client_request_session: read from master failed: Broken pipe\r\nkex_exchange_identification: read: Connection reset by peer\r\nConnection reset by 165.227.215.103 port 22",
+    "unreachable": true
+}
+2025-01-06 15:27:44,897 p=3269367 u=mtellal n=ansible | 51.159.180.166 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Shared connection to 51.159.180.166 closed.",
+    "unreachable": true
+}
+2025-01-06 15:27:48,767 p=3269367 u=mtellal n=ansible | 165.227.215.103 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: mux_client_request_session: read from master failed: Broken pipe\r\nkex_exchange_identification: read: Connection reset by peer\r\nConnection reset by 165.227.215.103 port 22",
+    "unreachable": true
+}

@@ -38,4 +38,13 @@ Useful commands:
 Host 192.168.56.100
     User root
 ```
-I'll be connected as root from 192.168.56.100 
+SSH agent try to connect as root from 192.168.56.100 
+
+#### ansible.cfg
+- ANSIBLE_CONFIG= - env var that specify the path of the configuration file 
+- Playbook folder - specific to the playbook
+- User home directory - specific to the user used
+- Global configuration `/etc/ansible/ansible.cfg` - apply to each call to ansible
+
+To see the differents options possible in the configuration file you can see the `/etc/ansiblbe/ansible.cfg` file or generate a default config file with the command: `ansible-config init --disabled > ansible.cfg`
+

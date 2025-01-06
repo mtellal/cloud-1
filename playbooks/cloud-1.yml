@@ -5,13 +5,13 @@
 
   - name: Download docker's official gpg key (debian)
     ansible.builtin.get_url:
-      url: https://download.docker.com/linux/debian/gpg
+      url: https://download.docker.com/linux/ubuntu/gpg
       dest: /etc/apt/keyrings/docker.asc
       mode: 444
 
   - name: Add docker repository to apt sources
     ansible.builtin.shell:
-      cmd: 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+      cmd: 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
 
   - name: Install docker packages
     ansible.builtin.apt:
@@ -24,10 +24,23 @@
       state: present
       update_cache: yes
 
+  - name: Install make package
+    ansible.builtin.apt:
+      name:
+        - make
+      state: present
+      update_cache: yes
+
   - name: Copy the inception folder to the home node 
     ansible.builtin.copy:
       src: ./inception
       dest: ~/
+
+  - name: Add the IP in DOMAIN_NAME in .env file
+    ansible.builtin.lineinfile:
+      path: ~/inception/srcs/.env
+      regexp: '^DOMAIN_NAME=.*'
+      line: "DOMAIN_NAME={{ ansible_host }}"
 
   - name: Up wordpress's site after reboot via cron
     ansible.builtin.cron:
@@ -36,6 +49,6 @@
       job: "make -C ~/inception"
 
   - name: Launch inception services 
-    ansible.builtin.shell:
-      cmd: "make -C ~/inception"
+    community.general.make:
+      chdir: "~/inception"
 
