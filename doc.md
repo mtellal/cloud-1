@@ -48,3 +48,20 @@ SSH agent try to connect as root from 192.168.56.100
 
 To see the differents options possible in the configuration file you can see the `/etc/ansiblbe/ansible.cfg` file or generate a default config file with the command: `ansible-config init --disabled > ansible.cfg`
 
+### Environment vars 
+
+- Globally in the playbook 
+```
+...
+environment:
+    var1: "FOO"
+...
+```
+- Individually in a specific task 
+```
+- name: xxx
+...
+environment:
+    var1: xxx
+...
+```
