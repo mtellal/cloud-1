@@ -45,10 +45,6 @@
       src: ../inception
       dest: ~/
 
-  - name: Debug inception_folder
-    ansible.builtin.debug:
-      var: inception_folder
-
   - name: Copy env file to inception folder
     ansible.builtin.copy:
       src: ../.env

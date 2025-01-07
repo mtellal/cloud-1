@@ -75,14 +75,6 @@ copy files and folders
 
 
 
-## Gather facts 
-
-## Roles
-
-## Tasks
-
-
-
 ## Inventory 
 
 -> INI simpe to read 
@@ -105,6 +97,49 @@ all:
 ### Vars / Env vars
 
 in the inventory folder:
-- inventory.yml
-- group_vars
+- inventory.yml 
+- group_vars - Must be a name of specific group in the inventory or name of the folder 
+- hosts_vars - It must be name of a specifi host or a folder, it include the vars for the target
+```
+|- inventory.yml
+|  |
+|  |-- group_vars
+|      |-- [ file.yml || file/ ] ...
+```
 
+`ansible-inventory --graph`
+```
+@all:
+  |--@ungrouped:
+  |--@hosts:
+  |  |--scaleway
+  |  |--vm
+```
+`ansible-inventory --graph --vars`
+```
+@all:
+  |--@ungrouped:
+  |--@hosts:
+  |  |--scaleway
+  |  |  |--{ansible_host = 51.159.180.166}
+  |  |  |--{ansible_user = root}
+  |  |  |--{inception_folder = {{ ansible_env.HOME }}/inception}
+  |  |--vm
+  |  |  |--{ansible_host = 192.168.56.104}
+  |  |  |--{ansible_user = root}
+  |  |  |--{inception_folder = {{ ansible_env.HOME }}/inception}
+  |  |--{ansible_user = root}
+  |  |--{inception_folder = {{ ansible_env.HOME }}/inception}
+```
+
+## Playbook 
+
+
+
+
+
+### Gather facts 
+
+### Roles
+
+### Tasks
