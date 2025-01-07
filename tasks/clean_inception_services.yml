@@ -1,2 +1,2 @@
 - name: Clean inception services and docker datas
-  shell: make -C ~/inceptions
+  shell: "make -C {{ inception_folder }}"

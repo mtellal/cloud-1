@@ -48,6 +48,8 @@ SSH agent try to connect as root from 192.168.56.100
 
 To see the differents options possible in the configuration file you can see the `/etc/ansiblbe/ansible.cfg` file or generate a default config file with the command: `ansible-config init --disabled > ansible.cfg`
 
+- `-m raw` - doesn't use the python interpreter
+
 ### Environment vars 
 
 - Globally in the playbook 
@@ -65,3 +67,44 @@ environment:
     var1: xxx
 ...
 ```
+
+
+copy files and folders
+- copy module - from host to target
+- fetch module - from target to host
+
+
+
+## Gather facts 
+
+## Roles
+
+## Tasks
+
+
+
+## Inventory 
+
+-> INI simpe to read 
+-> YAML tree and hierarchy organized (best practice)
+
+```
+all:
+    children:
+        parent1:            <- first group 'parent1'
+            hosts:
+                srv3        <- hosts/target of parent1
+            children:
+                child1:     
+                    children:
+                        srv1:
+                        srv2:
+...
+```
+
+### Vars / Env vars
+
+in the inventory folder:
+- inventory.yml
+- group_vars
+

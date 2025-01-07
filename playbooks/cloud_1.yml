@@ -1,6 +1,6 @@
 ---
 - name: cloud-1
-  hosts: vm
+  hosts: hosts
   tasks:
 
   - name: Download docker's official gpg key
@@ -45,15 +45,24 @@
       src: ../inception
       dest: ~/
 
+  - name: Debug inception_folder
+    ansible.builtin.debug:
+      var: inception_folder
+
+  - name: Copy env file to inception folder
+    ansible.builtin.copy:
+      src: ../.env
+      dest: "{{ inception_folder }}/srcs/.env"
+
   - name: Add the IP in DOMAIN_NAME in .env file
     ansible.builtin.lineinfile:
-      path: ~/inception/srcs/.env
+      path: "{{ inception_folder }}/srcs/.env"
       regexp: '^DOMAIN_NAME=.*'
       line: "DOMAIN_NAME={{ ansible_host }}"
 
   - name: Add the IP in PMA_ABSOLUTE_URI in .env file
     ansible.builtin.lineinfile:
-      path: ~/inception/srcs/.env
+      path: "{{ inception_folder }}/srcs/.env"
       regexp: '^PMA_ABSOLUTE_URI=.*'
       line: "PMA_ABSOLUTE_URI=https://{{ ansible_host }}/phpmyadmin"
 
@@ -61,9 +70,9 @@
     ansible.builtin.cron:
       name: "up wordpress site"
       special_time: "reboot"
-      job: "make -C ~/inception"
+      job: "make -C {{ inception_folder }}"
 
   - name: Launch inception services 
     community.general.make:
-      chdir: "~/inception"
+      chdir: "{{ inception_folder }}"
 

@@ -1,6 +1,6 @@
 ---
 - name: Remove docker
-  hosts: vm
+  hosts: hosts
   tasks:
 
   - name: Remove docker packages and configuration files (purge)
