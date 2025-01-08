@@ -1,5 +1,5 @@
 ansible.log
 .env
 inception/srcs/.env
-./roles/inception/templates/env
-./roles/inception/templates/.env
+roles/inception/templates/.env
+roles/inception/templates/env

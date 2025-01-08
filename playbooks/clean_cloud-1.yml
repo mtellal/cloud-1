@@ -3,12 +3,34 @@
   become: yes
   tasks:
 
+    - name: Verify if inception project exists
+      ansible.builtin.stat:
+        path: "{{ inception_folder }}"
+      register: __inception_project
+      ignore_errors: true
+
+#    - name: Debug inception project
+#      ansible.builtin.debug:
+#        msg: "{{ __inception_project }}"
+
+    - name: Check if Docker is installed
+      ansible.builtin.command: which docker
+      register: __docker_installed
+      ignore_errors: true
+
+#    - name: Debug docker
+#      ansible.builtin.debug:
+#        msg: "{{ __docker_installed }}"
+
     - name: Remove services and inception datas
       ansible.builtin.import_role: 
         name: inception
         tasks_from: clean
+      when: __docker_installed.rc == 0 and __inception_project.stat.exists
 
     - name: Uninstall docker
       ansible.builtin.import_role:
         name: docker
         tasks_from: clean
+      when: __docker_installed.rc == 0
+
