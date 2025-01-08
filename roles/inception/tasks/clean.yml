@@ -1,0 +1,3 @@
+- name: Remove docker's services and datas
+  ansible.builtin.shell: 
+    cmd: "make -C {{inception_folder}} fclean"

@@ -1,2 +1,0 @@
-- name: Clean inception services and docker datas
-  shell: "make -C {{ inception_folder }}"

@@ -1,2 +1,1 @@
-# some variables
 inception_folder: "{{ ansible_env.HOME }}/inception"

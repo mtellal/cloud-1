@@ -1,7 +1,0 @@
-- name: Remove inception services and docker packages
-  hosts: hosts
-  become: yes
-  tasks:
-    
-    - name: Remove docker's services and datas
-      shell: "make -C {{inception_folder}} fclean"

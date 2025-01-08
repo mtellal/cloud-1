@@ -1,64 +1,9 @@
 - name: cloud-1
   hosts: hosts
   become: yes
-  tasks:
+  roles:
+    - docker
+    - make
+    - inception
 
-  - name: Download docker's official gpg key
-    ansible.builtin.get_url:
-      url: "https://download.docker.com/linux/{{ansible_distribution|lower}}/gpg"
-      dest: /etc/apt/keyrings/docker.asc
-      mode: 444
-
-  - name: Get DEB architecture
-    ansible.builtin.command:
-      cmd: dpkg --print-architecture
-    register: __deb_architecture
-
-  - name: Get VERSION_CODENAME
-    ansible.builtin.command:
-      cmd: awk -F "=" '$1=="VERSION_CODENAME" {print $2}' /etc/os-release
-    register: __version_codename
-
-  - name: Add docker repository to apt sources
-    ansible.builtin.apt_repository:
-      repo: "deb [arch={{ __deb_architecture.stdout }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ __version_codename.stdout }} stable"
-      state: present
-
-  - name: Install docker packages
-    ansible.builtin.apt:
-      name:
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
-        - docker-buildx-plugin
-        - docker-compose-plugin
-      state: present
-      update_cache: yes
-
-  - name: Install make package
-    ansible.builtin.apt:
-      name:
-        - make
-      state: present
-      update_cache: yes
-
-  - name: Copy the inception folder to the home node 
-    ansible.builtin.copy:
-      src: ../inception
-      dest: ~/
-
-  - name: Copy env file to inception folder (template)
-    ansible.builtin.template:
-      src: ../templates/env
-      dest: "{{ inception_folder }}/srcs/.env"
-
-  - name: Up wordpress's site after reboot via cron
-    ansible.builtin.cron:
-      name: "up wordpress site"
-      special_time: "reboot"
-      job: "make -C {{ inception_folder }}"
-
-  - name: Launch inception services 
-    community.general.make:
-      chdir: "{{ inception_folder }}"
 

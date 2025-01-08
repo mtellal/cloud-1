@@ -1,0 +1,19 @@
+- name: Copy the inception folder to the home node 
+  ansible.builtin.copy:
+    src: ../../../inception
+    dest: ~/
+
+- name: Copy env file to inception folder (template)
+  ansible.builtin.template:
+    src: ../templates/env
+    dest: "{{ inception_folder }}/srcs/.env"
+
+- name: Up wordpress's site after reboot via cron
+  ansible.builtin.cron:
+    name: "up wordpress site"
+    special_time: "reboot"
+    job: "make -C {{ inception_folder }}"
+
+- name: Launch inception services 
+  community.general.make:
+    chdir: "{{ inception_folder }}"

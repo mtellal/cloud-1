@@ -194,8 +194,16 @@ hostname={{ ansible_hostname }}
 By adding `notify: handler_action` to a task and define a handlers section we can perform action based on a updated task. 
 If the files in our project folder change then a handler action will be performed and `systemd` will reload our `project_service`.
 
-### Gather facts 
 
 ### Roles
 
+-> Group of actions 
+-> Common templates, files etc ....
+
+
+
+
+
 ### Tasks
+
+### Gather facts 

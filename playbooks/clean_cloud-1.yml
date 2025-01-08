@@ -1,0 +1,14 @@
+- name: Remove docker
+  hosts: hosts
+  become: yes
+  tasks:
+
+    - name: Remove services and inception datas
+      ansible.builtin.import_role: 
+        name: inception
+        tasks_from: clean
+
+    - name: Uninstall docker
+      ansible.builtin.import_role:
+        name: docker
+        tasks_from: clean
