@@ -1,6 +1,6 @@
----
 - name: Remove docker
   hosts: hosts
+  become: yes
   tasks:
 
   - name: Remove docker packages and configuration files (purge)

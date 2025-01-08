@@ -134,9 +134,65 @@ in the inventory folder:
 
 ## Playbook 
 
+- Bind roles and hosts in inventory and perform tasks
 
+- Idempotence:
+If a task are played twice with the same inputs and the same result is equal then nothing is done 
 
+- Stateful:
+Save a state
 
+-> We can task execute task in local, ssh is not used in this case 
+```
+hosts: localhost
+connection: local
+```
+
+### Register 
+
+Save the output of a command to a register that can be used after inside the playbook
+
+```
+...
+    # task 
+    register: __register_var
+...
+```
+
+### Template
+
+Allow us to generate a file in fly with dynamic var and copy it to the target machine 
+```
+./template.j2
+# env vars file or configuration file
+hostname={{ ansible_hostname }} 
+```
+
+```
+./playbook.yml
+...
+    ansible.builtin.template:
+        src: ./template.j2
+...     dest: ./srcs/.env
+```
+
+### Notify / Handlers
+
+```
+...
+    # ex: copy project files
+    notify: handler_action
+...
+
+ handlers:
+    - name: handler_action
+        systemd:
+          name: project_service
+          state: reloaded
+```
+
+By adding `notify: handler_action` to a task and define a handlers section we can perform action based on a updated task. 
+If the files in our project folder change then a handler action will be performed and `systemd` will reload our `project_service`.
 
 ### Gather facts 
 

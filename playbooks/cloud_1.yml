@@ -1,6 +1,6 @@
----
 - name: cloud-1
   hosts: hosts
+  become: yes
   tasks:
 
   - name: Download docker's official gpg key
@@ -10,16 +10,18 @@
       mode: 444
 
   - name: Get DEB architecture
-    shell: dpkg --print-architecture
-    register: deb_architecture
+    ansible.builtin.command:
+      cmd: dpkg --print-architecture
+    register: __deb_architecture
 
   - name: Get VERSION_CODENAME
-    shell: awk -F "=" '$1=="VERSION_CODENAME" {print $2}' /etc/os-release
-    register: version_codename
+    ansible.builtin.command:
+      cmd: awk -F "=" '$1=="VERSION_CODENAME" {print $2}' /etc/os-release
+    register: __version_codename
 
   - name: Add docker repository to apt sources
     ansible.builtin.apt_repository:
-      repo: "deb [arch={{ deb_architecture.stdout }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ version_codename.stdout }} stable"
+      repo: "deb [arch={{ __deb_architecture.stdout }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ __version_codename.stdout }} stable"
       state: present
 
   - name: Install docker packages
@@ -45,22 +47,10 @@
       src: ../inception
       dest: ~/
 
-  - name: Copy env file to inception folder
-    ansible.builtin.copy:
-      src: ../.env
+  - name: Copy env file to inception folder (template)
+    ansible.builtin.template:
+      src: ../templates/env
       dest: "{{ inception_folder }}/srcs/.env"
-
-  - name: Add the IP in DOMAIN_NAME in .env file
-    ansible.builtin.lineinfile:
-      path: "{{ inception_folder }}/srcs/.env"
-      regexp: '^DOMAIN_NAME=.*'
-      line: "DOMAIN_NAME={{ ansible_host }}"
-
-  - name: Add the IP in PMA_ABSOLUTE_URI in .env file
-    ansible.builtin.lineinfile:
-      path: "{{ inception_folder }}/srcs/.env"
-      regexp: '^PMA_ABSOLUTE_URI=.*'
-      line: "PMA_ABSOLUTE_URI=https://{{ ansible_host }}/phpmyadmin"
 
   - name: Up wordpress's site after reboot via cron
     ansible.builtin.cron:
