@@ -1,30 +1,48 @@
 
-## Vm (virtualbox) environment configuration
-- Crate a virtual machine 
-- Create 2 interfaces:
-    - host-only-network
-    - NAT network
-Add them to the machine adaptaters
-- Verify the network interfaces (private and public addresses)
-If the interfaces are set but doesn't have an ip address. Use the `dhclient` command or edit the `/etc/network/interfaces` file to define the interfaces with the dhcp option 
-```
-auto enp0sX
-iface enp0sX inet dhcp
-```
-- Install ssh
-- Add user ssh key 
-If the user is root you need to edit the `/etc/ssh/sshd_config` file to permit the connection via password `PermiRootLogin: yes`
-Add the key wit the command `ssh-copy-id` and edit once again the variable `PermiRootLogin: prohbit-password` to restrict the root password connection.
+# Cloud-1 
 
+This topic is inspired by the subject Inception. </br>
+The goal is to deploy your site and the necessary docker infrastructure on an instance provided by a cloud provider. </br>
+In this version, each process will have its container. </br>
+You CANNOT deploy the same
+images from Inception and be done with it ; You can of course get the source of the
+website (Your WordPress blog for instance), but you have to deploy it using a container
+per process and automation.</br>
+Automation is essential here. The stages of deployment must be automated by a tool
+of your choice (We suggest Ansible). </br>
+This complete web server must be able to run several services in parallels such as
+Wordpress, PHPmyadmin and a database.
+
+## Documentation 
+- [Xavki - ansible playlist](https://www.youtube.com/watch?v=kzmvwc2q_z0&list=PLn6POgpklwWoCpLKOSw3mXCqbRocnhrh-)
+- [Ansible doc](https://docs.ansible.com/ansible/latest/getting_started/index.html)
+
+## Vm (virtualbox) environment configuration
+- Create a virtual machine
+- Create 2 interfaces:
+    - Host-only network
+    - NAT network
+Add them to the machine's adapters.
+- Verify the network interfaces (private and public addresses).
+If the interfaces are configured but don't have an IP address, use the `dhclient` command or edit the `/etc/network/interfaces` file to define the interfaces with the DHCP option:
+
+```
+auto enp0sX  
+iface enp0sX inet dhcp  
+```
+- Install SSH
+- Add the SSH user key
+If the user is root, you need to edit the `/etc/ssh/sshd_config` file to allow password-based connections by setting `PermitRootLogin: yes`.
+Add the key using the command `ssh-copy-id`, then edit the `sshd_config` file again and change the `PermitRootLogin value to prohibit-password` to restrict root password login.
 
 # Ansible 
 
 ### Installation and Configuration
-To install ansilbe we can use:
+To install Ansible you can use:
 - pip
-- apt
+- apt 
 
-!!! Cautions ansible search the old path of python2: `/usr/bin/python`. To use python3 you need to set the ansible interpreter variable in the inventory configuration `ansible_python-interpreter=/usr/bin/python2`
+>  **Warning !** Ansible search the old path of python2: `/usr/bin/python`. To use python3 you need to set the `ansible interpreter` variable in the inventory configuration `ansible_python-interpreter=/usr/bin/python2`
 
 #### SSH 
 Useful commands:
@@ -41,14 +59,14 @@ Host 192.168.56.100
 SSH agent try to connect as root from 192.168.56.100 
 
 #### ansible.cfg
-- ANSIBLE_CONFIG= - env var that specify the path of the configuration file 
+- `ANSIBLE_CONFIG=` - env var that specify the path of the configuration file 
 - Playbook folder - specific to the playbook
-- User home directory - specific to the user used
+- User home directory - specific to the user
 - Global configuration `/etc/ansible/ansible.cfg` - apply to each call to ansible
 
-To see the differents options possible in the configuration file you can see the `/etc/ansiblbe/ansible.cfg` file or generate a default config file with the command: `ansible-config init --disabled > ansible.cfg`
+To see the differents options in the configuration file you can see the `/etc/ansiblbe/ansible.cfg` file or generate a default config file with the command: `ansible-config init --disabled > ansible.cfg`
 
-- `-m raw` - doesn't use the python interpreter
+- `-m raw` - precise to doesn't use the python interpreter
 
 ### Environment vars 
 
@@ -69,7 +87,7 @@ environment:
 ```
 
 
-copy files and folders
+Copy files and folders
 - copy module - from host to target
 - fetch module - from target to host
 
@@ -96,10 +114,10 @@ all:
 
 ### Vars / Env vars
 
-in the inventory folder:
+In the inventory folder:
 - inventory.yml 
 - group_vars - Must be a name of specific group in the inventory or name of the folder 
-- hosts_vars - It must be name of a specifi host or a folder, it include the vars for the target
+- hosts_vars - It must be name of a specific host or a folder, it include the vars for the target
 ```
 |- inventory.yml
 |  |
@@ -134,15 +152,15 @@ in the inventory folder:
 
 ## Playbook 
 
-- Bind roles and hosts in inventory and perform tasks
+- Bind roles and hosts in inventory, perform tasks
 
 - Idempotence:
-If a task are played twice with the same inputs and the same result is equal then nothing is done 
+If a task are played twice with the same inputs and get the same results then the state is not updated 
 
 - Stateful:
 Save a state
 
--> We can task execute task in local, ssh is not used in this case 
+-> We can execute tasks in local, ssh is not used in this case 
 ```
 hosts: localhost
 connection: local
