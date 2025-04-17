@@ -35,6 +35,57 @@ iface enp0sX inet dhcp
 If the user is root, you need to edit the `/etc/ssh/sshd_config` file to allow password-based connections by setting `PermitRootLogin: yes`.
 Add the key using the command `ssh-copy-id`, then edit the `sshd_config` file again and change the `PermitRootLogin value to prohibit-password` to restrict root password login.
 
+
+## How to use 
+
+Clone the repository 
+```
+git clone git@github.com:mtellal/cloud-1
+```
+Install the `inception` submodule
+```
+git submodule init
+git submodule update
+```
+Copy the env file to `/roles/inception/templates/env` and set the variables
+```
+DOMAIN_NAME={{ ansible_host }}
+# certificates
+CERTS_=/etc/nginx/ssl/inception.crt
+
+# MYSQL SETUP
+SQL_DATABASE=inception_db
+SQL_ROOT_PASSWORD=
+SQL_USER=
+SQL_PASSWORD=
+
+# WORDPRESS SETUP
+WP_TITLE=inception_wp
+WP_ADMIN_USER=
+WP_ADMIN_PASSWORD=
+WP_ADMIN_EMAIL=
+WP_USER_LOGIN=
+WP_USER_EMAIL=
+WP_USER_PASSWORD=
+
+#phpmyadmin 
+PMA_HOST=mariadb
+PMA_PORT=3306
+#PMA_USER=
+#PMA_PASSWORD=
+PMA_ABSOLUTE_URI=https://{{ansible_host}}/phpmyadmin/
+```
+
+Finally, launch the `cloud-1` playbook
+```
+ansible-playbook playbooks/cloud_1.yml
+```
+
+To remove packages and folders use the `clean_cloud-1` playbook
+```
+ansible-playbook playbooks/clean_cloud-1.yml
+```
+
 # Ansible 
 
 ### Installation and Configuration
